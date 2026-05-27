@@ -126,15 +126,8 @@ body {
     transform: translateY(-2px);
 }
 
-.btn-dark {
-    background-color: #1a202c;
-    color: white;
-}
 
-.btn-dark:hover {
-    background-color: #2d3748;
-    transform: translateY(-2px);
-}
+
 
 .w-100 { width: 100%; }
 
@@ -329,14 +322,15 @@ body {
 /* --- TIMELINE SESSIONS --- */
 
 .scroll-box {
-    border: 3px solid var(--bg-dark-card);
+    border: 3px solid #0000004a;
     border-right: none;
-    padding: 2.3em;
     border-radius: 20px;
+    padding: 2.3em;
     height: 50vh;
     overflow-y: auto;
     scroll-behavior: smooth;
     scroll-snap-type: proximity;
+    box-shadow: 0 0 8px var(--bg-dark-sombre);
 }
 
 

@@ -1,8 +1,5 @@
 <?php
 
-
-
-
 $adminEmail = "amellah.dev@gmail.com";
 $adminPassword = "amellah";
 

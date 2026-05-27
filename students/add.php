@@ -1,7 +1,4 @@
-
-
 <?php
-
 
 if (isset($_POST['submit'])) {
 
@@ -20,7 +17,7 @@ if (isset($_POST['submit'])) {
 
     if (mysqli_query($conn, $sql)) {
 
-    header("Location: ../index.php?success=1");
+    header("Location: ../index.php");
     exit();
 
     } else {
@@ -46,7 +43,7 @@ if (isset($_POST['submit'])) {
                 <input type="text" placeholder="Ville" name="city" required>
                 <input type="text" placeholder="niveau..." name="lvl" required>
                 
-                <button type="submit" name="submit" class="btn btn-blue w-100">Valider</button>
+                <button type="submit" name="submit" class="btn btn-primary w-100">Valider</button>
             </form>
             <p class="auth-switch">Déjà inscrit ? <a href="#" onclick="switchModal('registerModal', 'loginModal')">Se connecter</a></p>
         </div>
