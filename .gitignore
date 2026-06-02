@@ -1,6 +1,5 @@
 # Sensitive files
-includes/config.php
-session/
+config/db.php
 
 # System files
 .DS_Store

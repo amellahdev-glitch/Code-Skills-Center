@@ -1,13 +1,22 @@
 
 
-<?php include'./includes/config.php';
-session_start(); ?>
-<!DOCTYPE html>
-<html lang="fr">
-    <?php include'./includes/header.php';  ?>
-<body>
-    
-    <?php  require_once'./includes/navbar.php' ?>
+<?php 
+// start a session
+session_start(); 
+// include the database file
+require './config/db.php';
+
+?>
+
+
+
+    <?php include './includes/header.php';  ?>
+    <body>
+        
+    <?php  require_once './includes/navbar.php'; ?>
+    <?php require './pages/students.php'; ?>
+
+    <!-- home page  -->
     
     <section id="home" class="hero-section">
         <div class="hero-overlay"></div>
@@ -64,34 +73,27 @@ session_start(); ?>
     
     <!-- formation part -->
     
-    <section id="formations" class="section-padding">
-        <div class="container">
-        <div class="section-header">
-            <h2>Nos Formations & Spécialités</h2>
-            <p>Explorez nos programmes intensifs conçus pour le marché de l'emploi.</p>
-        </div>
-        
-        <div class="tab-container">
-            <button class="tab-btn active" onclick="filterCourses('all')">Tout voir</button>
-            <button class="tab-btn" onclick="filterCourses('coding')">Coding & Tech</button>
-            <button class="tab-btn" onclick="filterCourses('languages')">Langues</button>
-        </div>
+    
         
 
         <?php 
         
-        include'./formations/read.php';
+        include './pages/formation.php';
         
         ?>
        
         
-    </section>
+    <!-- session part -->
 
-    <section id="sessions" class="section-padding bg-light">
-       <?php include'./session/session.php'; ?>
-    </section>
     
-    <?php include'./students/add.php'; ?>
+       <?php 
+       
+       include './pages/session.php'; 
+       
+       ?>
+
+    <!-- contact part -->
+    
     
     <section id="contact" class="section-padding">
         <div class="container">
@@ -117,8 +119,8 @@ session_start(); ?>
         </div>
     </section>
     
-    <?php include'./admin/logIn.php'; ?>
-    <?php require_once'./includes/footer.php'; ?>
+    <?php include './admin/logIn.php'; ?>
+    <?php require_once './includes/footer.php'; ?>
     
     
     

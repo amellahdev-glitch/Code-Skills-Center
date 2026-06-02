@@ -4,6 +4,18 @@
     $courses = mysqli_fetch_all($result, MYSQLI_ASSOC);
 
     ?>
+<section id="formations" class="section-padding">
+        <div class="container">
+        <div class="section-header">
+            <h2>Nos Formations & Spécialités</h2>
+            <p>Explorez nos programmes intensifs conçus pour le marché de l'emploi.</p>
+        </div>
+        
+        <div class="tab-container">
+            <button class="tab-btn active" onclick="filterCourses('all')">Tout voir</button>
+            <button class="tab-btn" onclick="filterCourses('coding')">Coding & Tech</button>
+            <button class="tab-btn" onclick="filterCourses('languages')">Langues</button>
+        </div>
 
 <div class="wraped-card">
     
@@ -19,3 +31,4 @@
 
         <?php endforeach; ?>
 </div>
+</section>
