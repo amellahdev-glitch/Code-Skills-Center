@@ -1,8 +1,8 @@
 <?php
 
-$sql = "SELECT * FROM session;";
-$result = mysqli_query($conn, $sql);
-$sessions = mysqli_fetch_all($result, MYSQLI_ASSOC);
+$stmt = $pdo->query("SELECT * FROM session;");
+
+$sessions = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 
 ?>

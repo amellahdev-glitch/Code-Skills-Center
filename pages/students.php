@@ -10,22 +10,25 @@ if (isset($_POST['submit'])) {
     $city = $_POST["city"];
     $lvl = $_POST["lvl"];
 
-    $sql = "INSERT INTO etudiant(numCINEtu, nomEtu, prenomEtu, dateNaissance, adressEtu, villeEtu, niveauEtu) 
-    VALUES ('$cin', '$firstName', '$secondName', '$dateBorn', '$adress', '$city', '$lvl')";
 
-    
+    $stmt = $pdo->exec("INSERT INTO etudiant(numCINEtu, nomEtu, prenomEtu, dateNaissance, adressEtu, villeEtu, niveauEtu) 
+    VALUES ('$cin', '$firstName', '$secondName', '$dateBorn', '$adress', '$city', '$lvl');");
 
-    if (mysqli_query($conn, $sql)) {
 
-    header("Location: ../index.php");
-    exit();
+
+
+
+    if ($stmt) {
+
+        header("Location: ./index.php");
+        exit();
 
     } else {
 
-    die(mysqli_error($conn));
+        die();
 
-}
-    
+    }
+
 }
 
 ?>
@@ -34,7 +37,7 @@ if (isset($_POST['submit'])) {
     <div class="modal-content">
         <span class="close-btn" onclick="closeModal('registerModal')">&times;</span>
         <h2>Inscription</h2>
-            <form action="" method="post" class="auth-form">
+        <form action="" method="post" class="auth-form">
             <input type="text" placeholder="n°: CIN " name="cin" required>
             <input type="text" placeholder="Nom" name="firstName" required>
             <input type="text" placeholder="Prenom" name="lastName" required>
@@ -42,9 +45,10 @@ if (isset($_POST['submit'])) {
             <input type="adress" name="adress" placeholder="adress" required>
             <input type="text" placeholder="Ville" name="city" required>
             <input type="text" placeholder="niveau..." name="lvl" required>
-                
+
             <button type="submit" name="submit" class="btn btn-primary w-100">Valider</button>
         </form>
-        <p class="auth-switch">Déjà inscrit ? <a href="#" onclick="switchModal('registerModal', 'loginModal')">Se connecter</a></p>
+        <p class="auth-switch">Déjà inscrit ? <a href="" onclick="switchModal('registerModal', 'loginModal')">Se
+                connecter</a></p>
     </div>
 </div>

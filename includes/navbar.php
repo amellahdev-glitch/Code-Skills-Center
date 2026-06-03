@@ -11,7 +11,7 @@
             </button>
 
             <nav class="nav-links">
-                <a href="#home" class="active">Accueil</a>
+                <a href="#home">Accueil</a>
                 <a href="#formations">Formations</a>
                 <a href="#specialites">Spécialités</a>
                 <a href="#sessions">Sessions</a>

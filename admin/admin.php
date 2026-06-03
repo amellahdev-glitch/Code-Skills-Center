@@ -1,27 +1,23 @@
-<?php 
-// include'../includes/config.php';
-// $students = [];
-    
+<?php
+include '../config/db.php';
 
-//     if(isset($_POST['submit'])) {
 
-//         $name = $_POST['name'];
+$stmt = $pdo->query("SELECT * from formation;");
 
-//         $sql = "SELECT * FROM etudiant WHERE nomEtu =  '$name'";
-//         $result = mysqli_query($conn, $sql);
-//         $students = mysqli_fetch_all($result, MYSQLI_ASSOC);
+$courses = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-//     }
 ?>
 
 
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
     <title>Admin dashbord</title>
     <style>
         #dashbord {
@@ -29,10 +25,11 @@
         }
 
         nav {
-            border-right: 2px solid black;
+            border-right: 2px solid #0D6EFD;
         }
     </style>
 </head>
+
 <body>
 
     <main id="dashbord" class="d-flex">
@@ -41,27 +38,57 @@
                 <img width="200" class="" src="../assets/images/logo.png" alt="">
             </a>
             <ul class="nav flex-column gap-3 align-items-center mt-5 w-100">
-                <li class="nav-itme w-100 d-flex justify-content-center" style="border-bottom: 2px solid black;"><a class="nav-link fs-3 fw-bold text-secondary" href="">Formation</a></li>
-                <li class="nav-itme w-100 d-flex justify-content-center" style="border-bottom: 2px solid black;"><a class="nav-link fs-3 fw-bold text-secondary" href="">Etudiant</a></li>
-                <li class="nav-itme w-100 d-flex justify-content-center" style="border-bottom: 2px solid black;"><a class="nav-link fs-3 fw-bold text-secondary" href="">Session</a></li>
-                <li class="nav-itme w-100 d-flex justify-content-center" style="border-bottom: 2px solid black;"><a class="nav-link fs-3 fw-bold text-secondary" href="">Specialité</a></li>
+                <li class="nav-itme w-100 d-flex py-3 justify-content-center bg-primary-subtle"><a
+                        class="nav-link fs-3 fw-bold text-dark" href="">Formation</a></li>
+                <li class="nav-itme w-100 py-3 d-flex justify-content-center bg-primary-subtle"><a
+                        class="nav-link fs-3 fw-bold text-dark" href="">Etudiant</a></li>
+                <li class="nav-itme w-100 py-3 d-flex justify-content-center bg-primary-subtle"><a
+                        class="nav-link fs-3 fw-bold text-dark" href="">Session</a></li>
+                <li class="nav-itme w-100 py-3  d-flex justify-content-center bg-primary-subtle"><a
+                        class="nav-link fs-3 fw-bold text-dark" href="">Specialité</a></li>
             </ul>
         </nav>
-        <div class="content w-75">
-
-        </div>
+        <section>
+            <div class="content w-75">
+                <h1 class="p-3">les formations</h1>
+                <table class="table table-striped table-hover">
+                    <thead>
+                        <tr class="table-danger table-active">
+                            <th scope="col">Formation</th>
+                            <th scope="col">Durée</th>
+                            <th scope="col">Prix</th>
+                            <th scope="col">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php foreach ($courses as $course): ?>
+                            <tr>
+                                <td><?php echo $course['titreForm']; ?></td>
+                                <td><?php echo $course['dureeForm']; ?></td>
+                                <td><?php echo $course['prixForm']; ?></td>
+                                <td class="d-flex gap-2"><button class="btn btn-primary">Modifier</button><button
+                                        class="btn btn-danger">Supprimer</button></td>
+                            </tr>
+                        <?php endforeach; ?>
+                    </tbody>
+                </table>
+            </div>
+        </section>
     </main>
 
 
-    
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+        crossorigin="anonymous"></script>
 </body>
+
 </html>
 
-<?php 
-    // if(isset($_POST['submit'])) {
-    //     mysqli_free_result($result);
+<?php
 
-    // }
-    // mysqli_close($conn);
+// mysqli_free_result($result);
+
+
+// mysqli_close($conn);

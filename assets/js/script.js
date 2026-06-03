@@ -23,22 +23,22 @@ window.onclick = function(event) {
     }
 }
 // Dynamic Course Filtering
-// function filterCourses(category) {
-//     const cards = document.querySelectorAll('.course-card');
-//     const buttons = document.querySelectorAll('.tab-btn');
+function filterCourses(category) {
+    const cards = document.querySelectorAll('.course-card');
+    const buttons = document.querySelectorAll('.tab-btn');
     
-//     // Update active tab button look
-//     buttons.forEach(btn => btn.classList.remove('active'));
-//     event.target.classList.add('active');
+    // Update active tab button look
+    buttons.forEach(btn => btn.classList.remove('active'));
+    event.target.classList.add('active');
 
-//     // Filter Logic
-//     cards.forEach(card => {
-//         if (category === 'all') {
-//             card.style.display = 'block';
-//         } else if (card.classList.contains(category)) {
-//             card.style.display = 'block';
-//         } else {
-//             card.style.display = 'none';
-//         }
-//     });
-// }
+    // Filter Logic
+    cards.forEach(card => {
+        if (category === 'all') {
+            card.style.display = 'block';
+        } else if (card.classList.contains(category)) {
+            card.style.display = 'block';
+        } else {
+            card.style.display = 'none';
+        }
+    });
+}

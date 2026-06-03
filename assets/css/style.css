@@ -1,4 +1,3 @@
-
 * {
     margin: 0;
     padding: 0;
@@ -12,7 +11,7 @@
 
 .wraped-card {
     display: grid;
-    grid-template-columns: repeat(3,1fr);
+    grid-template-columns: repeat(3, 1fr);
     gap: 20px;
     max-width: 80em;
 }
@@ -102,7 +101,8 @@ body {
     transition: color 0.3s;
 }
 
-.nav-links a:hover, .nav-links a.active {
+.nav-links a:hover,
+.nav-links a.active {
     color: var(--accent-blue);
 }
 
@@ -129,7 +129,9 @@ body {
 
 
 
-.w-100 { width: 100%; }
+.w-100 {
+    width: 100%;
+}
 
 /* --- HERO SECTION --- */
 .hero-section {
@@ -144,8 +146,11 @@ body {
 
 .hero-overlay {
     position: absolute;
-    top: 0; left: 0; width: 100%; height: 100%;
-    background-image: radial-gradient(rgba(255,255,255,0.05) 1px, transparent 0);
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: radial-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 0);
     background-size: 24px 24px;
     opacity: 0.7;
 }
@@ -185,7 +190,7 @@ body {
     color: #1a202c;
     padding: 30px;
     border-radius: 12px;
-    box-shadow: 0 20px 40px rgba(0,0,0,0.25);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.25);
     max-width: 580px;
 }
 
@@ -222,16 +227,32 @@ body {
     animation: float 6s ease-in-out infinite;
 }
 
-.icon-1 { top: 10%; left: 20%; animation-delay: 0s; }
-.icon-2 { bottom: 20%; right: 15%; animation-delay: 2s; }
-.icon-3 { top: 40%; right: 40%; animation-delay: 4s; }
+.icon-1 {
+    top: 10%;
+    left: 20%;
+    animation-delay: 0s;
+}
+
+.icon-2 {
+    bottom: 20%;
+    right: 15%;
+    animation-delay: 2s;
+}
+
+.icon-3 {
+    top: 40%;
+    right: 40%;
+    animation-delay: 4s;
+}
 
 /* --- SECTION GENERAL --- */
 .section-padding {
     padding: 80px 0;
 }
 
-.bg-light { background-color: white; }
+.bg-light {
+    background-color: white;
+}
 
 .section-header {
     text-align: center;
@@ -262,7 +283,8 @@ body {
     transition: all 0.3s;
 }
 
-.tab-btn.active, .tab-btn:hover {
+.tab-btn.active,
+.tab-btn:hover {
     background-color: var(--accent-blue);
     color: white;
     border-color: var(--accent-blue);
@@ -271,7 +293,7 @@ body {
 
 .courses-grid {
     display: flex;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); 
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: 20px;
 
 }
@@ -288,7 +310,7 @@ body {
 
 .course-card:hover {
     transform: translateY(-2px);
-    box-shadow: 0 15px 30px rgba(0,0,0,0.05);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.05);
 }
 
 .course-icon {
@@ -341,7 +363,7 @@ body {
     position: relative;
     margin-bottom: 40px;
     border-left: 2px solid var(--accent-blue-hover);
-    padding-left:1.2em ;
+    padding-left: 1.2em;
 }
 
 .timeline-name {
@@ -374,9 +396,12 @@ body {
     color: var(--text-gray);
 }
 
-.info-list i { color: var(--accent-blue); }
+.info-list i {
+    color: var(--accent-blue);
+}
 
-.contact-form input, .contact-form textarea {
+.contact-form input,
+.contact-form textarea {
     width: 100%;
     padding: 12px;
     margin-bottom: 15px;
@@ -390,8 +415,11 @@ body {
 .modal {
     display: none;
     position: fixed;
-    top: 0; left: 0; width: 100%; height: 100%;
-    background-color: rgba(0,0,0,0.6);
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
     z-index: 2000;
     justify-content: center;
     align-items: center;
@@ -409,7 +437,8 @@ body {
 
 .close-btn {
     position: absolute;
-    top: 15px; right: 20px;
+    top: 15px;
+    right: 20px;
     font-size: 1.8rem;
     cursor: pointer;
 }
@@ -449,58 +478,126 @@ footer {
     transition: color 0.3s;
 }
 
-.footer-socials a:hover { color: white; }
+.footer-socials a:hover {
+    color: white;
+}
 
 /* --- ANIMATIONS --- */
 @keyframes float {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-15px); }
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-15px);
+    }
 }
 
 @keyframes slideDown {
-    from { transform: translateY(-30px); opacity: 0; }
-    to { transform: translateY(0); opacity: 1; }
+    from {
+        transform: translateY(-30px);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
 }
 
 .fade-in {
     opacity: 0;
     animation: fadeInAnimation 0.8s ease-out forwards;
 }
-.delay-1 { animation-delay: 0.2s; }
-.delay-2 { animation-delay: 0.4s; }
+
+.delay-1 {
+    animation-delay: 0.2s;
+}
+
+.delay-2 {
+    animation-delay: 0.4s;
+}
 
 @keyframes fadeInAnimation {
     from {
         opacity: 0;
         transform: translateY(10px);
     }
-    to { 
-        opacity: 1; 
+
+    to {
+        opacity: 1;
         transform: translateY(0);
     }
 }
 
 /* --- MOBILE RESPONSIVE --- */
-.menu-toggle { display: none; background: none; border: none; cursor: pointer; }
-.menu-toggle .bar { display: block; width: 25px; height: 3px; background: #333; margin: 5px auto; }
+.menu-toggle {
+    display: none;
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+.menu-toggle .bar {
+    display: block;
+    width: 25px;
+    height: 3px;
+    background: #333;
+    margin: 5px auto;
+}
 
 @media (max-width: 968px) {
-    .hero-container, .contact-wrapper { grid-template-columns: 1fr; }
-    .tech-bg-graphic { min-height: 100px; }
-    .nav-links { display: none; position: absolute; top: 100%; left: 0; width: 100%; background: white; flex-direction: column; padding: 20px; box-shadow: 0 10px 15px rgba(0,0,0,0.1); }
-    .nav-links.active { display: flex; }
-    .menu-toggle { display: block; }
-    .card-buttons { flex-direction: column; }
-    .wraped-card { grid-template-columns: repeat(1, 1fr);}
-    .course-card { width: auto; }
+
+    .hero-container,
+    .contact-wrapper {
+        grid-template-columns: 1fr;
+    }
+
+    .tech-bg-graphic {
+        min-height: 100px;
+    }
+
+    .nav-links {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        background: white;
+        flex-direction: column;
+        padding: 20px;
+        box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+    }
+
+    .nav-links.active {
+        display: flex;
+    }
+
+    .menu-toggle {
+        display: block;
+    }
+
+    .card-buttons {
+        flex-direction: column;
+    }
+
+    .wraped-card {
+        grid-template-columns: repeat(1, 1fr);
+    }
+
+    .course-card {
+        width: auto;
+    }
 }
 
 .error {
-            border: 2px solid red;
-        }
+    border: 2px solid red;
+}
 
-        .error-message {
-            color: red;
-            font-size: 14px;
-            margin-top: -5px;
-        }
+.error-message {
+    color: red;
+    font-size: 14px;
+    margin-top: -5px;
+}
