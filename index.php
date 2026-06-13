@@ -1,8 +1,8 @@
 <?php
 // start a session
 session_start();
+require_once './config/db.php';
 // include the database file
-require './config/db.php';
 
 ?>
 
@@ -12,7 +12,7 @@ require './config/db.php';
 
 <body>
 
-    <?php require_once './includes/navbar.php'; ?>
+    <?php require './includes/navbar.php'; ?>
     <?php require './pages/students.php'; ?>
 
     <!-- home page  -->
@@ -97,7 +97,7 @@ require './config/db.php';
     <?php
 
     include './pages/specialites.php';
-    
+
     ?>
 
 
@@ -138,8 +138,7 @@ require './config/db.php';
     </section>
 
     <?php include './admin/logIn.php'; ?>
-    <?php require_once './includes/footer.php'; ?>
-
+    <?php require './includes/footer.php'; ?>
 
 
 

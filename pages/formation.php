@@ -14,12 +14,6 @@ $courses = $stmt->fetchAll(PDO::FETCH_ASSOC);
             <p>Explorez nos programmes intensifs conçus pour le marché de l'emploi.</p>
         </div>
 
-        <!-- <div class="tab-container">
-            <button class="tab-btn active" onclick="filterCourses('all')">Tout voir</button>
-            <button class="tab-btn" onclick="filterCourses('coding')">Coding & Tech</button>
-            <button class="tab-btn" onclick="filterCourses('languages')">Langues</button>
-        </div> -->
-
         <div class="wraped-card">
 
             <?php foreach ($courses as $course): ?>
