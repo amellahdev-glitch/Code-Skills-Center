@@ -21,7 +21,7 @@ $courses = $stmt->fetchAll(PDO::FETCH_ASSOC);
                 <div class="course-card coding">
                     <div class="course-icon"><i class="fa-solid fa-code"></i></div>
                     <h3><?php echo $course['titreForm']; ?></h3>
-                    <p><?php echo $course['dureeForm']; ?> Moins</p>
+                    <p><?php echo $course['dureeForm']; ?> Mois</p>
                     <span class="badge">
                         <p class="my-auto"><?php echo $course['prixForm']; ?> Mad</p>
                     </span>

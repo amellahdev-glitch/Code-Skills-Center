@@ -1,20 +1,22 @@
 <?php
+// 1. DATABASE CONNECTION
 require '../config/db.php';
 
+// 2. FETCH DATA USING SIMPLE, STANDARD PDO STATEMENTS
+$stmt1 = $pdo->query("SELECT * FROM formation");
+$courses = $stmt1->fetchAll(PDO::FETCH_ASSOC);
 
-$stmt = $pdo->query("SELECT * from formation;");
-
-$courses = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
+$stmt2 = $pdo->query("SELECT * FROM etudiant");
+$students = $stmt2->fetchAll(PDO::FETCH_ASSOC);
 
 
-$stmt = $pdo->query("SELECT * from etudiant;");
+$stmt3 = $pdo->query("SELECT * FROM session");
+$sessions = $stmt3->fetchAll(PDO::FETCH_ASSOC);
 
-$students = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
+$stmt4 = $pdo->query("SELECT * FROM specialite");
+$specialites = $stmt4->fetchAll(PDO::FETCH_ASSOC);
 ?>
-
-
 
 <!DOCTYPE html>
 <html lang="en">
@@ -22,133 +24,268 @@ $students = $stmt->fetchAll(PDO::FETCH_ASSOC);
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
-    <title>Admin dashbord</title>
+    <title>Tulua Institute — Admin Dashboard</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
     <style>
-        #dashbord {
-            min-height: 100vh !important;
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8f9fa;
         }
 
-        nav {
-            border-right: 2px solid #0D6EFD;
+        /* 1. Freeze the sidebar on the left screen layout */
+        .sidebar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            width: 16.666667%;
+            /* This matches col-md-2 width perfectly */
+            height: 100vh;
+            background-color: #ffffff;
+            border-right: 1px solid #e9ecef;
+            z-index: 1000;
+            /* Keeps it on top of other elements */
+            overflow-y: auto;
+            /* If you add lots of links, the sidebar can scroll internally */
+        }
+
+        /* 2. Offset the main content so it doesn't slide under the fixed sidebar */
+        main {
+            margin-left: 16.666667%;
+            /* Exactly the width of your sidebar */
+            width: 83.333333%;
+            /* Takes up the remaining screen space */
+        }
+
+        /* Small adjustment for responsiveness on tablet screens */
+        @media (max-width: 768px) {
+            .sidebar {
+                position: relative;
+                width: 100%;
+                height: auto;
+                min-height: auto;
+            }
+
+            main {
+                margin-left: 0;
+                width: 100%;
+            }
+        }
+
+        .nav-custom-link {
+            display: flex;
+            align-items: center;
+            padding: 0.8rem 1.5rem;
+            color: #495057;
+            text-decoration: none;
+            font-weight: 500;
+            border-radius: 8px;
+            transition: all 0.2s ease;
+        }
+
+        .nav-custom-link:hover {
+            background-color: #f1f3f5;
+            color: #0d6efd;
+        }
+
+        /* Beautiful container boxes for your tables */
+        .card-table-wrapper {
+            background: #ffffff;
+            border: 1px solid #e9ecef;
+            border-radius: 12px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.02);
+            overflow: hidden;
+            margin-bottom: 40px;
         }
     </style>
 </head>
 
 <body>
 
-    <main id="dashbord" class="d-flex w-100">
+    <div class="container-fluid">
+        <div class="row">
 
-        <!-- navbar section -->
+            <nav class="col-md-3 col-lg-2 sidebar p-3 d-flex flex-column">
+                <a href="../index.php" class="d-block text-center my-4">
+                    <img width="160" src="../assets/images/logo.png" alt="Tulua Institute" class="img-fluid">
+                </a>
 
-        <nav class="h-auto w-25 d-flex justify-content-start flex-column">
-            <a href="../index.php" class="mx-auto mb-5 my-3">
-                <img width="200" class="" src="../assets/images/logo.png" alt="">
-            </a>
-            <ul class="nav flex-column gap-3 align-items-center mt-5 w-100">
-                <li class="nav-itme w-100 d-flex py-3 justify-content-center bg-primary-subtle"><a
-                        class="nav-link fs-3 fw-bold text-dark" href="">Formation</a></li>
-                <li class="nav-itme w-100 py-3 d-flex justify-content-center bg-primary-subtle"><a
-                        class="nav-link fs-3 fw-bold text-dark" href="">Etudiant</a></li>
-                <li class="nav-itme w-100 py-3 d-flex justify-content-center bg-primary-subtle"><a
-                        class="nav-link fs-3 fw-bold text-dark" href="">Session</a></li>
-                <li class="nav-itme w-100 py-3  d-flex justify-content-center bg-primary-subtle"><a
-                        class="nav-link fs-3 fw-bold text-dark" href="">Specialité</a></li>
-            </ul>
-        </nav>
-
-        <!-- the date fetch section -->
-
-        <div class="d-flex flex-column w-100">
-
-            <section class="w-100">
-                <div class="content">
-                    <h1 class="p-3">les formations</h1>
-                    <table class="table table-striped table-hover">
-                        <thead>
-                            <tr class="table-danger table-active">
-                                <th scope="col">Formation</th>
-                                <th scope="col">Durée</th>
-                                <th scope="col">Prix</th>
-                                <th scope="col" class="w-25">Action</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <?php foreach ($courses as $course): ?>
-                                <tr>
-                                    <td><?php echo $course['titreForm']; ?></td>
-                                    <td><?php echo $course['dureeForm']; ?></td>
-                                    <td><?php echo $course['prixForm']; ?></td>
-                                    <td class="d-flex gap-2">
-                                        <button class="btn btn-primary">Modifier</button>
-                                        <button name="delete" class="btn btn-danger">Supprimer</button>
-                                    </td>
-                                </tr>
-                            <?php endforeach; ?>
-                        </tbody>
-                    </table>
-
-
+                <div class="nav flex-column gap-2 mt-3">
+                    <a class="nav-custom-link" href="#formations-section">Formations</a>
+                    <a class="nav-custom-link" href="#etudiants-section">Étudiants</a>
+                    <a class="nav-custom-link" href="#session-section">Sessions</a>
+                    <a class="nav-custom-link" href="#specialite-section">Spécialités</a>
                 </div>
-            </section>
 
-            <section class="w-100">
-                <h1 class="p-3">Etudiant:</h1>
-                <table class="table table-striped table-hover">
-                    <thead>
-                        <tr class="table-danger table-active">
-                            <th scope="col">N°: CIN</th>
-                            <th scope="col">Nom complet</th>
-                            <th scope="col">Ville</th>
-                            <th scope="col">Date de naissance</th>
-                            <th scope="col" class="w-25">Action</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <?php foreach ($students as $student): ?>
-                            <tr>
-                                <td><?php echo $student['numCINEtu']; ?>"</td>
-                                <td><?php echo $student['nomEtu'] . " " . $student['prenomEtu']; ?></td>
-                                <td><?php echo $student['dateNaissance']; ?></td>
-                                <td><?php echo $student['villeEtu']; ?></td>
-                                <td class="d-flex gap-2">
+                <div class="mt-auto pt-4 border-top">
+                    <a href="../index.php" class="btn btn-outline-secondary btn-sm w-100">← Back to Site</a>
+                </div>
+            </nav>
 
-                                    <?php
+            <main class="col-md-9 ms-sm-auto col-lg-10 px-md-5 py-4">
 
-                                    $sql = "DELETE FROM specialite WHERE codeSpec = 105;";
+                <div id="formations-section" class="d-flex justify-content-between align-items-center mb-3 mt-2">
+                    <h1 class="h3 text-dark fw-bold">Gestion des Formations</h1>
+                    <button class="btn btn-primary px-4 btn-sm fw-medium">+ Ajouter une Formation</button>
+                </div>
 
-                                    $nb = $pdo->exec($sql);
+                <div class="card-table-wrapper">
+                    <div class="table-responsive">
+                        <table class="table table-hover align-middle mb-0">
+                            <thead class="table-light">
+                                <tr>
+                                    <th class="ps-4">Nom de la Formation</th>
+                                    <th>Durée (Mois)</th>
+                                    <th>Prix (MAD)</th>
+                                    <th class="text-end pe-4">Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php foreach ($courses as $course) { ?>
+                                    <tr>
+                                        <td class="fw-semibold ps-4 text-secondary">
+                                            <?php echo htmlspecialchars($course['titreForm']); ?></td>
+                                        <td><?php echo htmlspecialchars($course['dureeForm']); ?> Mois</td>
+                                        <td class="fw-medium text-success">
+                                            <?php echo htmlspecialchars($course['prixForm']); ?> DH</td>
+                                        <td class="text-end pe-4">
+                                            <div class="btn-group btn-group-sm gap-3">
+                                                <button class="btn btn-outline-primary">Modifier</button>
+                                                <button class="btn btn-outline-danger">Supprimer</button>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                <?php } ?>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
 
-                                    echo $nb . " spécialité supprimée";
 
-                                    ?>
+                <div id="etudiants-section" class="d-flex justify-content-between align-items-center mb-3 pt-2">
+                    <h1 class="h3 text-dark fw-bold">Gestion des Étudiants</h1>
+                    <button class="btn btn-primary px-4 btn-sm fw-medium">+ Inscrire un Étudiant</button>
+                </div>
 
-                                    <button class="btn btn-primary">Modifier</button>
-                                    <button name="delete" class="btn btn-danger">Supprimer</button>
-                                </td>
-                            </tr>
-                        <?php endforeach; ?>
-                    </tbody>
-                </table>
+                <div class="card-table-wrapper">
+                    <div class="table-responsive">
+                        <table class="table table-hover align-middle mb-0">
+                            <thead class="table-light">
+                                <tr>
+                                    <th class="ps-4">CIN</th>
+                                    <th>Nom Complet</th>
+                                    <th>Ville</th>
+                                    <th>Date de Naissance</th>
+                                    <th class="text-end pe-4">Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php foreach ($students as $student) { ?>
+                                    <tr>
+                                        <td class="fw-bold ps-4 text-dark">
+                                            <?php echo htmlspecialchars($student['numCINEtu']); ?></td>
+                                        <td><?php echo htmlspecialchars($student['nomEtu'] . " " . $student['prenomEtu']); ?>
+                                        </td>
+                                        <td><?php echo htmlspecialchars($student['villeEtu']); ?></td>
+                                        <td><?php echo htmlspecialchars(date('d/m/Y', strtotime($student['dateNaissance']))); ?></td>
+                                        <td class="text-end pe-4">
+                                            <div class="btn-group btn-group-sm gap-3">
+                                                <button class="btn btn-outline-primary">Modifier</button>
+                                                <button class="btn btn-outline-danger">Supprimer</button>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                <?php } ?>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
 
-            </section>
 
+
+                <div id="session-section" class="d-flex justify-content-between align-items-center mb-3 pt-2">
+                    <h1 class="h3 text-dark fw-bold">Gestion des Sessions</h1>
+                    <button class="btn btn-primary px-4 btn-sm fw-medium">+ Ajouter une Session</button>
+                </div>
+
+                <div class="card-table-wrapper">
+                    <div class="table-responsive">
+                        <table class="table table-hover align-middle mb-0">
+                            <thead class="table-light">
+                                <tr>
+                                    <th class="ps-4">Session</th>
+                                    <th>Date de debut</th>
+                                    <th>Date fin</th>
+                                    <th class="text-end pe-4">Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php foreach ($sessions as $session) { ?>
+                                    <tr>
+                                        <td class="fw-bold ps-4 text-dark">
+                                            <?php echo htmlspecialchars($session['nomSess']); ?></td>
+                                        <td><?php echo htmlspecialchars(date('d/m/Y', strtotime($session['dateDebut']))); ?></td>
+                                        <td><?php echo htmlspecialchars(date('d/m/Y', strtotime($session['dateFin']))); ?></td>
+                                        <td class="text-end pe-4">
+                                            <div class="btn-group btn-group-sm gap-3">
+                                                <button class="btn btn-outline-primary">Modifier</button>
+                                                <button class="btn btn-outline-danger">Supprimer</button>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                <?php } ?>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+
+
+
+                <div id="specialite-section" class="d-flex justify-content-between align-items-center mb-3 pt-2">
+                    <h1 class="h3 text-dark fw-bold">Gestion des Sessions</h1>
+                    <button class="btn btn-primary px-4 btn-sm fw-medium">+ Ajouter une Session</button>
+                </div>
+
+                <div class="card-table-wrapper">
+                    <div class="table-responsive">
+                        <table class="table table-hover align-middle mb-0">
+                            <thead class="table-light">
+                                <tr>
+                                    <th class="ps-4">Specialité</th>
+                                    <th>Active</th>
+                                    <th class="text-end pe-4">Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php foreach ($specialites as $specialite) { ?>
+                                    <tr>
+                                        <td class="fw-bold ps-4 text-dark"><?php echo htmlspecialchars($specialite['descSpec']); ?></td>
+                                        <td><?php echo htmlspecialchars(($specialite['Active'] == 1) ? "ouverte" : "fermer") ?></td>
+                                        <td class="text-end pe-4">
+                                            <div class="btn-group btn-group-sm gap-3">
+                                                <button class="btn btn-outline-primary">Modifier</button>
+                                                <button class="btn btn-outline-danger">Supprimer</button>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                <?php } ?>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+            </main>
         </div>
-    </main>
+    </div>
 
-
-
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
-        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 
 </html>
-
-<?php
-
-// mysqli_free_result($result);
-
-
-// mysqli_close($conn);

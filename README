@@ -1,0 +1,28 @@
+file structure:
+ CentreFormation/
+├──index.php
+├──README
+│
+├── config/
+│   └── db.php
+│
+├── pages/
+│   ├── formations.php
+│   ├── catalogue.php
+│   ├── sessions.php
+│   ├── inscription.php
+│   ├── login.php
+│   ├── adminLogin.php
+│   └── contact.php
+│
+├── admin/
+│   ├── dashboard.php
+│   ├── etudiants.php
+│   ├── formations.php
+│   └── inscriptions.php
+│
+├── assets/
+│   ├── css/
+│   ├── js/
+│   └── images/
+│
