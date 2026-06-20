@@ -20,7 +20,7 @@ $sessions = $stmt->fetchAll(PDO::FETCH_ASSOC);
         <div class="scroll-box">
 
 
-            <table class="table table-striped">
+            <!-- <table class="table table-striped">
                 <thead>
                     <tr class="table-primary">
                         <th scope="col">Session</th>
@@ -29,15 +29,21 @@ $sessions = $stmt->fetchAll(PDO::FETCH_ASSOC);
                     </tr>
                 </thead>
                 <tbody>
-                    <?php foreach ($sessions as $session): ?>
-                        <tr>
-                            <td class="col"><?php echo $session['nomSess']; ?></td>
-                            <td class="col"><?php echo date('d/m/Y', strtotime($session['dateDebut'])); ?></td>
-                            <td class="col"><?php echo date('d/m/Y', strtotime($session['dateFin'])); ?></td>
-                        </tr>
-                    <?php endforeach; ?>
+                    <tr>
+                        <td class="col"></td>
+                        <td class="col"></td>
+                        <td class="col"></td>
+                    </tr>
                 </tbody>
-            </table>
+            </table> -->
+            
+            <?php foreach ($sessions as $session): ?>
+            <details>
+                <summary><?php echo $session['nomSess']; ?></summary>
+                <p>Debut: <?php echo date('d/m/Y', strtotime($session['dateDebut'])); ?></p>
+                <p>Fin: <?php echo date('d/m/Y', strtotime($session['dateFin'])); ?></p>
+            </details>
+            <?php endforeach; ?>
 
         </div>
 

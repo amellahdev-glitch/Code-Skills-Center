@@ -266,6 +266,7 @@ body {
 }
 
 /* --- TABS & COURSE CARDS --- */
+
 .tab-container {
     display: flex;
     justify-content: center;
@@ -688,3 +689,6 @@ footer {
     opacity: 1;
     pointer-events: auto;
 }
+
+
+/* ================= */
