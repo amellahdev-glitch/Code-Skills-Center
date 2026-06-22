@@ -5,20 +5,22 @@ $showSuccess = false; // Flag to check if we should show the popup
 if (isset($_POST['submit'])) {
 
     $cin = $_POST["cin"];
-    $firstName = $_POST["firstName"];
-    $secondName = $_POST["lastName"];
-    $dateBorn = $_POST["dateBorn"];
-    $adress = $_POST["adress"];
+    $nom = $_POST["nom"];
+    $prenom = $_POST["prenom"];
+    $dateNaissance = $_POST["dateNaissance"];
+    $adresse = $_POST["adresse"];
+    $ville = $_POST["ville"];
+    $niveau = $_POST["niveau"];
     $email = $_POST["email"];
-    $password = $_POST["password"];
-    $session = $_POST["session"];
-    $type = $_POST["typeOfFormation"];
+    $motPasse = $_POST["password"];
+    $codeSess = $_POST["codeSess"];
+    $type = $_POST["typeCours"];
 
     $sql = "INSERT INTO etudiant (numCINEtu, nomEtu,prenomEtu ,dateNaissance,adressEtu,villeEtu,niveauEtu,emailEtu,motPasseEtu) VALUES (:cin,:nom,:prenom,:dateN,:adresse,:ville,:niveau,:email,:motPasse)";
 
     $requete = $pdo->prepare($sql);
 
-    $requete->execute([
+    $res1 = $requete->execute([
         ':cin' => $cin,
         ':nom' => $nom,
         ':prenom' => $prenom,
@@ -32,24 +34,22 @@ if (isset($_POST['submit'])) {
 
     $sql2 = "INSERT INTO inscription (codeSess, numCINEtu, typeCours) VALUES (:codeSess,:cin,:typeCours)";
 
-
     $requete2 = $pdo->prepare($sql2);
 
-    $requete2->execute([
+    $res2 = $requete2->execute([
         ':codeSess' => $codeSess,
         ':cin' => $cin,
-        ':typeCours' => $typeCours
+        ':typeCours' => $type
     ]);
 
-
-
-    if ($result) {
+    if ($res1 && $res2) {
         // Instead of redirecting instantly, we set this to true
         $showSuccess = true;
     } else {
         die("Erreur lors de l'inscription.");
     }
 }
+
 ?>
 
 <style>
@@ -230,15 +230,31 @@ if (isset($_POST['submit'])) {
                         required>
                 </div>
                 <div class="col-md-6">
-                    <input type="password" class="form-control" placeholder="Mot de passe" name="motPasse" required>
+                    <input type="password" class="form-control" placeholder="Mot de passe" name="password" required>
                 </div>
+
+                <?php
+                $stmt = $pdo->query("SELECT * FROM session");
+                $sessionCode = $stmt->fetchAll(PDO::FETCH_ASSOC);
+                ?>
+
+
                 <div class="col-md-6">
                     <select name="codeSess" class="form-select" required>
                         <option value="" disabled selected>Choisir une session</option>
-                        <option value="1">Session 1</option>
-                        <option value="2">Session 2</option>
+
+
+                        <?php foreach ($sessionCode as $session): ?>
+                            <option value="<?php echo $session["codeSess"]; ?>"><?php echo $session["nomSess"]; ?></option>
+                        <?php endforeach; ?>
+
+
                     </select>
+
                 </div>
+
+
+
                 <div class="col-md-6">
                     <select name="typeCours" class="form-select" required>
                         <option value="" disabled selected>Type de cours</option>
@@ -281,7 +297,7 @@ if (isset($_POST['submit'])) {
         if (registerModal) { registerModal.style.display = 'none'; }
 
 
-        document.getElementById('successPopup').classList.add('show');
+        document.getElementById('successPopup').style.display = 'flex';
 
         setTimeout(() => {
             redirectToIndex();

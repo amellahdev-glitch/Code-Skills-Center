@@ -101,17 +101,27 @@ require_once './config/db.php';
     ?>
 
 
+    <!-- catalog part -->
+
+    <?php
+
+    include './pages/catalog.php';
+
+    ?>
+
+
     <!-- session part -->
 
 
     <?php
-    
+
 
     include './pages/session.php';
 
     ?>
 
     <!-- contact part -->
+
 
 
     <section id="contact" class="section-padding">
