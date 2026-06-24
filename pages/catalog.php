@@ -5,8 +5,7 @@ $stmtSpecs = $pdo->query("SELECT * FROM specialite;");
 $specialties = $stmtSpecs->fetchAll(PDO::FETCH_ASSOC);
 
 // Fetch only the courses linked to specialties via the catalogue table
-$query = "
-    SELECT 
+$query = "SELECT 
         f.codeForm,
         f.titreForm,
         f.dureeForm,

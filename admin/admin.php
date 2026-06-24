@@ -150,14 +150,21 @@ $specialites = $stmt4->fetchAll(PDO::FETCH_ASSOC);
                                 <?php foreach ($courses as $course) { ?>
                                     <tr>
                                         <td class="fw-semibold ps-4 text-secondary">
-                                            <?php echo htmlspecialchars($course['titreForm']); ?></td>
+                                            <?php echo htmlspecialchars($course['titreForm']); ?>
+                                        </td>
                                         <td><?php echo htmlspecialchars($course['dureeForm']); ?> Mois</td>
                                         <td class="fw-medium text-success">
-                                            <?php echo htmlspecialchars($course['prixForm']); ?> DH</td>
+                                            <?php echo htmlspecialchars($course['prixForm']); ?> DH
+                                        </td>
                                         <td class="text-end pe-4">
                                             <div class="btn-group btn-group-sm gap-3">
                                                 <button class="btn btn-outline-primary">Modifier</button>
-                                                <button class="btn btn-outline-danger">Supprimer</button>
+                                                <button class="btn btn-outline-danger"><a
+                                                        href="delete.php?table=formation&id=<?php echo $course['titreForm']; ?>"
+                                                        class="btn btn-outline-danger"
+                                                        onclick="return confirm('Supprimer cette formation ?');">
+                                                        Supprimer
+                                                    </a></button>
                                             </div>
                                         </td>
                                     </tr>
@@ -189,15 +196,22 @@ $specialites = $stmt4->fetchAll(PDO::FETCH_ASSOC);
                                 <?php foreach ($students as $student) { ?>
                                     <tr>
                                         <td class="fw-bold ps-4 text-dark">
-                                            <?php echo htmlspecialchars($student['numCINEtu']); ?></td>
+                                            <?php echo htmlspecialchars($student['numCINEtu']); ?>
+                                        </td>
                                         <td><?php echo htmlspecialchars($student['nomEtu'] . " " . $student['prenomEtu']); ?>
                                         </td>
                                         <td><?php echo htmlspecialchars($student['villeEtu']); ?></td>
-                                        <td><?php echo htmlspecialchars(date('d/m/Y', strtotime($student['dateNaissance']))); ?></td>
+                                        <td><?php echo htmlspecialchars(date('d/m/Y', strtotime($student['dateNaissance']))); ?>
+                                        </td>
                                         <td class="text-end pe-4">
                                             <div class="btn-group btn-group-sm gap-3">
                                                 <button class="btn btn-outline-primary">Modifier</button>
-                                                <button class="btn btn-outline-danger">Supprimer</button>
+                                                <button class="btn btn-outline-danger"><a
+                                                        href="delete.php?table=etudiant&id=<?php echo $student['numCINEtu']; ?>"
+                                                        class="btn btn-outline-danger"
+                                                        onclick="return confirm('Supprimer cet étudiant ?');">
+                                                        Supprimer
+                                                    </a></button>
                                             </div>
                                         </td>
                                     </tr>
@@ -229,13 +243,21 @@ $specialites = $stmt4->fetchAll(PDO::FETCH_ASSOC);
                                 <?php foreach ($sessions as $session) { ?>
                                     <tr>
                                         <td class="fw-bold ps-4 text-dark">
-                                            <?php echo htmlspecialchars($session['nomSess']); ?></td>
-                                        <td><?php echo htmlspecialchars(date('d/m/Y', strtotime($session['dateDebut']))); ?></td>
-                                        <td><?php echo htmlspecialchars(date('d/m/Y', strtotime($session['dateFin']))); ?></td>
+                                            <?php echo htmlspecialchars($session['nomSess']); ?>
+                                        </td>
+                                        <td><?php echo htmlspecialchars(date('d/m/Y', strtotime($session['dateDebut']))); ?>
+                                        </td>
+                                        <td><?php echo htmlspecialchars(date('d/m/Y', strtotime($session['dateFin']))); ?>
+                                        </td>
                                         <td class="text-end pe-4">
                                             <div class="btn-group btn-group-sm gap-3">
                                                 <button class="btn btn-outline-primary">Modifier</button>
-                                                <button class="btn btn-outline-danger">Supprimer</button>
+                                                <button class="btn btn-outline-danger"><a
+                                                        href="delete.php?table=session&id=<?php echo $session['nomSess']; ?>"
+                                                        class="btn btn-outline-danger"
+                                                        onclick="return confirm('Supprimer cette session ?');">
+                                                        Supprimer
+                                                    </a></button>
                                             </div>
                                         </td>
                                     </tr>
@@ -266,12 +288,19 @@ $specialites = $stmt4->fetchAll(PDO::FETCH_ASSOC);
                             <tbody>
                                 <?php foreach ($specialites as $specialite) { ?>
                                     <tr>
-                                        <td class="fw-bold ps-4 text-dark"><?php echo htmlspecialchars($specialite['descSpec']); ?></td>
-                                        <td><?php echo htmlspecialchars(($specialite['Active'] == 1) ? "ouverte" : "fermer") ?></td>
+                                        <td class="fw-bold ps-4 text-dark">
+                                            <?php echo htmlspecialchars($specialite['descSpec']); ?></td>
+                                        <td><?php echo htmlspecialchars(($specialite['Active'] == 1) ? "ouverte" : "fermer") ?>
+                                        </td>
                                         <td class="text-end pe-4">
                                             <div class="btn-group btn-group-sm gap-3">
                                                 <button class="btn btn-outline-primary">Modifier</button>
-                                                <button class="btn btn-outline-danger">Supprimer</button>
+                                                <button class="btn btn-outline-danger"><a
+                                                        href="delete.php?table=specialite&id=<?php echo $specialite['nomSpec']; ?>"
+                                                        class="btn btn-outline-danger"
+                                                        onclick="return confirm('Supprimer cette spécialité ?');">
+                                                        Supprimer
+                                                    </a></button>
                                             </div>
                                         </td>
                                     </tr>
@@ -285,7 +314,6 @@ $specialites = $stmt4->fetchAll(PDO::FETCH_ASSOC);
         </div>
     </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 
 </html>
